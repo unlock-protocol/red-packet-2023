@@ -40,7 +40,7 @@ export default function Home() {
                 Gift a red packet to your friends and loved ones! On the day of
                 the lunar new year, they may earn a prize!
               </p>
-              <p className="w-1/4 flex flex-col items-center	">
+              <p className="md:w-1/4 flex flex-col items-center">
                 <Button
                   disabled
                   className="w-1/2 mt-8 md:w-48 bg-gradient-to-r from-blue-500"
