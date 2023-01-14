@@ -9,11 +9,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TK</title>
+        <title>Red Packet 2023</title>
 
-        <meta property="og:title" content="TK" key="title" />
+        <meta property="og:title" content="Red Packet" key="title" />
         <meta property="og:description" key="description" content="" />
-        <meta property="og:image" content="TK" />
+        <meta property="og:image" content="/images/hero.svg" />
         <meta
           property="og:url"
           content="https://red-packet.unlock-protocol.com/"
@@ -29,7 +29,7 @@ export default function Home() {
               <h2 className="text-3xl	font-light leading-10">
                 新年快樂, 恭喜發財
               </h2>
-              <h1 className="text-6xl	sm:whitespace-nowrap	 font-semibold md:font-extrabold md:text-8xl">
+              <h1 className="text-6xl	sm:whitespace-nowrap font-semibold md:font-extrabold md:text-8xl">
                 HAPPY LUNAR <br />
                 NEW YEAR!
               </h1>
@@ -37,18 +37,21 @@ export default function Home() {
                 Limited edition of 1680.
               </h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur. Mi id ut vitae aliquet
-                leo interdum gravida. Sed nunc eros turpis vitae risus.
+                Gift a red packet to your friends and loved ones! On the day of
+                the lunar new year, they may earn a prize!
               </p>
-              <Button
-                disabled
-                className="w-1/2 mt-8 md:w-48"
-                onClick={() => {
-                  console.log("mint!");
-                }}
-              >
-                Mint (Starting January 18th!)
-              </Button>
+              <p className="w-1/4 flex flex-col items-center	">
+                <Button
+                  disabled
+                  className="w-1/2 mt-8 md:w-48 bg-gradient-to-r from-blue-500"
+                  onClick={() => {}}
+                >
+                  Mint
+                </Button>
+                <small className="text-yellow">
+                  Mint starts on January 18th
+                </small>
+              </p>
             </div>
             <div className="md:-ml-64 z-0">
               <img alt="red packer" src="/images/hero.svg" />
