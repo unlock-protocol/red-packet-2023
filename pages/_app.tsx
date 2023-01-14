@@ -31,7 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.asPath]);
 
   return <QueryClientProvider client={queryClient}>
-    <canvas id="Snow" className="absolute	" />
     <Component {...pageProps} />
   </QueryClientProvider>
 

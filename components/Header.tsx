@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
+import { Button } from "./Button";
 
 function truncate(text = "", startChars = 5, endChars = 3, maxLength = 11) {
   if (text.length > maxLength) {
@@ -73,23 +74,21 @@ const Header = () => {
           Discord
         </Link>
         {isAuthenticated && user ? (
-          <button
-            className="bg-red font-bold py-2 px-4 rounded-full whitespace-nowrap "
+          <Button
             onClick={() => {
               logout();
             }}
           >
             Logout ({truncate(user)})
-          </button>
+          </Button>
         ) : (
-          <button
-            className="bg-red whitespace-nowrap font-bold py-2 px-4 rounded-full"
+          <Button
             onClick={() => {
               login();
             }}
           >
             Connect Wallet
-          </button>
+          </Button>
         )}
       </div>
     </nav>
