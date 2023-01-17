@@ -644,6 +644,11 @@
     "@typescript-eslint/types" "5.44.0"
     eslint-visitor-keys "^3.3.0"
 
+"@unlock-protocol/contracts@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@unlock-protocol/contracts/-/contracts-0.0.16.tgz#de45948c1339d6d2075e83dcff4a9de7558a95a3"
+  integrity sha512-pPfbGQYeaq+h68O5zWfICjcHRijkqqjYwylWKS+iEjWKEBFPvAWy4p9Z5hnsOWnsURY8xvXAeD7PTeouaRgfYA==
+
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"

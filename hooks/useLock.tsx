@@ -2,33 +2,32 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useCallback, useState } from "react";
 import { ethers } from "ethers";
 import { useQuery } from "@tanstack/react-query";
+import PublicLockV12 from "@unlock-protocol/contracts/dist/abis/PublicLock/PublicLockV12.json";
 
-export function useLock(address: string, lockAddress: string) {
-  const query = useQuery(["key", lockAddress, address], async () => {
+export function useLock(network: number, lockAddress: string, address: string) {
+  const query = useQuery(["key", network, lockAddress, address], async () => {
+    if (!network || !lockAddress || !address) {
+      return false;
+    }
+
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://rpc.unlock-protocol.com/137"
+      `https://rpc.unlock-protocol.com/${network}`
     );
 
-    const lock = new ethers.Contract(
-      lockAddress,
-      [
-        {
-          inputs: [
-            { internalType: "address", name: "_keyOwner", type: "address" },
-          ],
-          name: "getHasValidKey",
-          outputs: [{ internalType: "bool", name: "isValid", type: "bool" }],
-          stateMutability: "view",
-          type: "function",
-        },
-      ],
-      provider
-    );
-    return await lock.getHasValidKey(address);
+    const lock = new ethers.Contract(lockAddress, PublicLockV12.abi, provider);
+    const hasMembership = await lock.getHasValidKey(address);
+    let tokenId = undefined;
+    if (hasMembership) {
+      tokenId = await lock.tokenOfOwnerByIndex(address, 0);
+    }
+    return {
+      hasMembership,
+      tokenId,
+    };
   });
 
   return {
-    hasMembership: query.data,
+    ...query.data,
     isLoading: query.isLoading,
   };
 }
