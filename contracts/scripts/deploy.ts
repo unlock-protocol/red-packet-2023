@@ -11,9 +11,9 @@ async function main() {
   console.log(`Deploying from ${user.address} on ${chainId}`);
 
   const RedPacket = await ethers.getContractFactory("RedPacket");
-  const reveal = 1674324000000; // Sat Jan 21 2023 19:36:00 GMT-0500 (Eastern Standard Time)
+  const reveal = 1674324000; // Sat Jan 21 2023 19:36:00 GMT-0500 (Eastern Standard Time)
   const hook = await RedPacket.deploy(
-    "0x611dcb02f50505305ae59a4b6b9802dd00cf0088", // Goerli lock
+    "0x01703c979220de3e7662ab90a696843225d31383", // Optimism lock
     reveal
   );
   await hook.deployed();

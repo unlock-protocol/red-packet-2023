@@ -2,8 +2,8 @@ import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useLock } from "../hooks/useLock";
 
-const network = 5;
-const lockAddress = "0x611dcb02f50505305ae59a4b6b9802dd00cf0088";
+const network = 137;
+const lockAddress = "0x01703c979220de3e7662ab90a696843225d31383";
 
 export const Home = () => {
   const { isAuthenticated, login, purchase, user } = useAuth();
