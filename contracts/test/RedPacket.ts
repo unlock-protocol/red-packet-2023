@@ -2,6 +2,10 @@ const { expect } = require("chai");
 const { ethers, unlock } = require("hardhat");
 import { time } from "@nomicfoundation/hardhat-network-helpers";
 
+// fetch Unlock contract address from package
+const { networks: { '137' : { unlockAddress }} } = unlock
+console.log(`Unlock: ${unlockAddress}`)
+
 const parseJsonDataUri = (uri: string): any => {
   const regex = /^data:.+\/(.+);base64,(.*)$/;
 
@@ -22,7 +26,6 @@ const parseJsonDataUri = (uri: string): any => {
 describe("RedPacket", function () {
   it("should work as a hook", async function () {
     const [user] = await ethers.getSigners();
-    await unlock.deployProtocol();
     const expirationDuration = 60 * 60 * 24 * 7;
     const maxNumberOfKeys = 1680;
     const keyPrice = ethers.utils.parseEther("1.0");
@@ -30,6 +33,7 @@ describe("RedPacket", function () {
     const recipient = "0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5"; // Random address as recipient!
 
     const { lock } = await unlock.createLock({
+      unlockAddress,
       expirationDuration,
       maxNumberOfKeys,
       keyPrice,
