@@ -13,7 +13,10 @@ export default function Index() {
 
         <meta property="og:title" content="Red Packet" key="title" />
         <meta property="og:description" key="description" content="" />
-        <meta property="og:image" content="/images/hero.svg" />
+        <meta
+          property="og:image"
+          content="https://unlock-protocol.com/images/blog/redpacket-rabbit/redpacket-rabbit.png"
+        />
         <meta
           property="og:url"
           content="https://red-packet.unlock-protocol.com/"
