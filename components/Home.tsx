@@ -45,7 +45,12 @@ export const Home = () => {
   if (hasMembership) {
     return (
       <div className="flex flex-col w-full flex-col justify-center items-center	">
-        <Image width="500" height="500" src="/images/red-packet/teaser.svg" />
+        <Image
+          alt="red packet teaser"
+          width="500"
+          height="500"
+          src="/images/red-packet/teaser.svg"
+        />
         <h1 className="bg-red text-2xl">Mint Completed</h1>
         <p className="text-xl text-center w-1/2">
           At the begining of the lunar new year, on January 22nd, you can open
