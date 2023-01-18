@@ -1,4 +1,5 @@
-import { Button } from "../components/Button";
+import { useRouter } from "next/router";
+import { Button, buttonClasses } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useLock } from "../hooks/useLock";
 import { Loading } from "./Loading";
@@ -11,6 +12,7 @@ const lockAddress = "0x01703c979220de3e7662ab90a696843225d31383";
 
 export const Home = () => {
   const { isAuthenticated, login, purchase, user } = useAuth();
+  const router = useRouter();
 
   const { hasMembership, tokenId, isLoading } = useLock(
     network,
@@ -19,16 +21,21 @@ export const Home = () => {
   );
 
   const checkout = () => {
-    purchase({
-      title: "🧧 Happy Lunar New Year!",
-      locks: {
-        [lockAddress]: {
-          network,
-          emailRequired: true,
+    purchase(
+      {
+        title: "🧧 Happy Lunar New Year!",
+        locks: {
+          [lockAddress]: {
+            network,
+            emailRequired: true,
+          },
         },
+        pessimistic: true,
       },
-      pessimistic: true,
-    });
+      {
+        done: "true",
+      }
+    );
   };
 
   const tweetIntent = new URL("https://twitter.com/intent/tweet");
@@ -42,6 +49,43 @@ export const Home = () => {
     return <Loading />;
   }
 
+  if (router.query?.done === "true") {
+    return (
+      <div className="flex flex-col w-full flex-col justify-center items-center	">
+        <Image
+          alt="red packet teaser"
+          width="500"
+          height="500"
+          src="/images/red-packet/teaser.svg"
+        />
+        <h1 className="bg-red text-2xl">Mint Completed</h1>
+        <p className="text-xl text-center w-1/2">
+          At the beginning of the lunar new year, on January 22nd, your friend
+          can open your Hongbao and see if they have received a special gift!
+          <br />
+          Please ask them to connect their wallet on:
+          <pre>
+            <Link href="https://red-packet.unlock-protocol.com/">
+              https://red-packet.unlock-protocol.com/
+            </Link>
+          </pre>
+        </p>
+        <div className="flex mt-8">
+          <Link
+            className={`${buttonClasses} hover:bg-red bg-darkred  mr-3`}
+            href={tweetIntent.toString()}
+          >
+            <BsTwitter className="inline-block mr-2" />
+            Tweet this!
+          </Link>
+          <Button className="" onClick={() => checkout()}>
+            Send another red packet!
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   if (hasMembership) {
     return (
       <div className="flex flex-col w-full flex-col justify-center items-center	">
@@ -53,16 +97,21 @@ export const Home = () => {
         />
         <h1 className="bg-red text-2xl">Mint Completed</h1>
         <p className="text-xl text-center w-1/2">
-          At the begining of the lunar new year, on January 22nd, you can open
+          At the beginning of the lunar new year, on January 22nd, you can open
           your Hongbao and see if you have received a special gift!
         </p>
-        <Link
-          className="border whitespace-nowrap	 text-white font-bold py-2 px-4 mt-3 rounded"
-          href={tweetIntent.toString()}
-        >
-          <BsTwitter className="inline-block mr-2" />
-          Tweet this!
-        </Link>
+        <div className="flex mt-8">
+          <Link
+            className={`${buttonClasses} hover:bg-red bg-darkred  mr-3`}
+            href={tweetIntent.toString()}
+          >
+            <BsTwitter className="inline-block mr-2" />
+            Tweet this!
+          </Link>
+          <Button className="" onClick={() => checkout()}>
+            Send another red packet!
+          </Button>
+        </div>
       </div>
     );
   }
