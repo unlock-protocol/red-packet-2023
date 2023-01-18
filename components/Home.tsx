@@ -2,6 +2,9 @@ import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useLock } from "../hooks/useLock";
 import { Loading } from "./Loading";
+import { BsTwitter } from "react-icons/bs";
+import Link from "next/link";
+import Image from "next/image";
 
 const network = 137;
 const lockAddress = "0x01703c979220de3e7662ab90a696843225d31383";
@@ -28,6 +31,13 @@ export const Home = () => {
     });
   };
 
+  const tweetIntent = new URL("https://twitter.com/intent/tweet");
+  tweetIntent.searchParams.set(
+    "text",
+    `🧧 I have just gifted a Red Packet #hongbao to a friend of mine with @unlockProtocol. You should do it too! `
+  );
+  tweetIntent.searchParams.set("url", "https://red-packet.unlock-protocol.com");
+
   if (isLoading) {
     return <Loading />;
   }
@@ -35,12 +45,19 @@ export const Home = () => {
   if (hasMembership) {
     return (
       <div className="flex flex-col w-full flex-col justify-center items-center	">
-        <img className="w-2/3 " src="/images/red-packet/teaser.svg" />
+        <Image width="500" height="500" src="/images/red-packet/teaser.svg" />
         <h1 className="bg-red text-2xl">Mint Completed</h1>
-        <p className="text-xl text-center">
+        <p className="text-xl text-center w-1/2">
           At the begining of the lunar new year, on January 22nd, you can open
           your Hongbao and see if you have received a special gift!
         </p>
+        <Link
+          className="border whitespace-nowrap	 text-white font-bold py-2 px-4 mt-3 rounded"
+          href={tweetIntent.toString()}
+        >
+          <BsTwitter className="inline-block mr-2" />
+          Tweet this!
+        </Link>
       </div>
     );
   }
