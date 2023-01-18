@@ -9,6 +9,7 @@ export function useLock(network: number, lockAddress: string, address: string) {
     if (!network || !lockAddress || !address) {
       return false;
     }
+    let tokenId = undefined;
 
     const provider = new ethers.providers.JsonRpcProvider(
       `https://rpc.unlock-protocol.com/${network}`
@@ -16,7 +17,6 @@ export function useLock(network: number, lockAddress: string, address: string) {
 
     const lock = new ethers.Contract(lockAddress, PublicLockV12.abi, provider);
     const hasMembership = await lock.getHasValidKey(address);
-    let tokenId = undefined;
     if (hasMembership) {
       tokenId = await lock.tokenOfOwnerByIndex(address, 0);
     }

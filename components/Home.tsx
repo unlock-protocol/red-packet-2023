@@ -1,6 +1,7 @@
 import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 import { useLock } from "../hooks/useLock";
+import { Loading } from "./Loading";
 
 const network = 137;
 const lockAddress = "0x01703c979220de3e7662ab90a696843225d31383";
@@ -8,7 +9,11 @@ const lockAddress = "0x01703c979220de3e7662ab90a696843225d31383";
 export const Home = () => {
   const { isAuthenticated, login, purchase, user } = useAuth();
 
-  const { hasMembership, tokenId, isLoading } = useLock(5, lockAddress, user);
+  const { hasMembership, tokenId, isLoading } = useLock(
+    network,
+    lockAddress,
+    user
+  );
 
   const checkout = () => {
     purchase({
@@ -24,7 +29,7 @@ export const Home = () => {
   };
 
   if (isLoading) {
-    return null;
+    return <Loading />;
   }
 
   if (hasMembership) {
