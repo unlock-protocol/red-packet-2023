@@ -1,7 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import { ethers } from "ethers";
-import { useQuery } from "@tanstack/react-query";
 import Header from "../components/Header";
 import { Home } from "../components/Home";
 
@@ -12,7 +10,16 @@ export default function Index() {
         <title>Red Packet 2023</title>
 
         <meta property="og:title" content="Red Packet" key="title" />
-        <meta property="og:description" key="description" content="" />
+        <meta
+          property="og:description"
+          key="description"
+          content=" Gift a red packet to your friends and loved ones! On the day of the
+          lunar new year, they may get a prize!"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@unlockprotocol" />
+
         <meta
           property="og:image"
           content="https://unlock-protocol.com/images/blog/redpacket-rabbit/redpacket-rabbit.png"
