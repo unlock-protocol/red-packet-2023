@@ -28,6 +28,7 @@ export const Home = () => {
           [lockAddress]: {
             network,
             emailRequired: true,
+            maxRecipients: 10,
           },
         },
         pessimistic: true,
