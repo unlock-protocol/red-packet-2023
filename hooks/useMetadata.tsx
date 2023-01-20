@@ -35,17 +35,6 @@ export function useMetadata(
     );
 
     const lock = new ethers.Contract(lockAddress, PublicLockV12.abi, provider);
-    const metadata = parseJsonDataUri(await lock.tokenURI(tokenId));
-    return {
-      description: "A Red Packet for the Lunar New Year of 2023!",
-      external_url: "https://red-packet.unlock-protocol.com/",
-      image: "ipfs://QmZ36mis8daTmXWeBcTjfHCSSeQMyWcJH8mNvyB6i8KAXb/168.svg",
-      name: "Red Packet #1",
-      attributes: [
-        { trait_type: "Prize", value: 168 },
-        { trait_type: "Redeemed", value: false },
-      ],
-    };
-    return metadata;
+    return parseJsonDataUri(await lock.tokenURI(tokenId));
   });
 }
