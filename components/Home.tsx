@@ -129,9 +129,9 @@ export const Home = () => {
     );
   }
 
-  const prize = metadata.attributes.find((x: any) => x.trait_type === "Prize")
+  const prize = metadata?.attributes?.find((x: any) => x.trait_type === "Prize")
     ?.value;
-  const redeemed = metadata.attributes.find(
+  const redeemed = metadata?.attributes?.find(
     (x: any) => x.trait_type === "Redeemed"
   )?.value;
 
