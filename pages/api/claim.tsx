@@ -5,7 +5,7 @@ const ABI = [{"inputs":[{"internalType":"address","name":"_lock","type":"address
 
 export default async function  handler(req: NextApiRequest, res: NextApiResponse) {
   if(!process.env.PRIVATE_KEY) {
-    return   res.status(500).json('Missing private key')
+    return res.status(500).json('Missing private key')
   }
   const provider = new ethers.providers.JsonRpcProvider('https://rpc.unlock-protocol.com/137')
   const signer = new ethers.Wallet(process.env.PRIVATE_KEY).connect(provider)
