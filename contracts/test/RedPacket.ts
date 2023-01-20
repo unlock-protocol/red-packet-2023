@@ -3,8 +3,12 @@ const { ethers, unlock } = require("hardhat");
 import { time } from "@nomicfoundation/hardhat-network-helpers";
 
 // fetch Unlock contract address from package
-const { networks: { '137' : { unlockAddress }} } = unlock
-console.log(`Unlock: ${unlockAddress}`)
+const {
+  networks: {
+    "137": { unlockAddress },
+  },
+} = unlock;
+console.log(`Unlock: ${unlockAddress}`);
 
 const parseJsonDataUri = (uri: string): any => {
   const regex = /^data:.+\/(.+);base64,(.*)$/;
@@ -88,7 +92,7 @@ describe("RedPacket", function () {
       })
     ).to.reverted;
 
-    expect(await hook.prize(1)).to.equal(168); // Always winning since it's the only player!
+    expect(await hook.prize(1)).to.equal(168); // Always winning since it's the player!
     const metadataAfterReveal = parseJsonDataUri(await lock.tokenURI(1));
     expect(metadataAfterReveal.description).to.equal(
       "A Red Packet for the Lunar New Year of 2023!"
@@ -137,7 +141,7 @@ describe("RedPacket", function () {
     expect(metadataAfterClaimPrize.attributes[1].value).to.equal(true);
   });
 
-  it.only("should work when there are many buyers!", async function () {
+  it("should work when there are many buyers!", async function () {
     const [user] = await ethers.getSigners();
     await unlock.deployProtocol();
     const expirationDuration = 60 * 60 * 24 * 7;
