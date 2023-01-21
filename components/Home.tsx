@@ -178,7 +178,7 @@ export const Home = () => {
               <p className="text-xl text-center w-1/2">
                 We wish you a Happy New Year!
                 <br />
-                This time, there was no
+                This time, there was no gift for you in this red packet!
               </p>
             )}
             {parseInt(prize) > 0 && !redeemed && (
