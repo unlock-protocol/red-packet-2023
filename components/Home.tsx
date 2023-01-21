@@ -234,6 +234,8 @@ export const Home = () => {
     );
   }
 
+  const newYearStarted = new Date().getTime() / 1000 > 1674324000;
+
   return (
     <>
       <div className="md:w-2/3 md:mt-40 z-10">
@@ -242,28 +244,51 @@ export const Home = () => {
           HAPPY LUNAR <br />
           NEW YEAR!
         </h1>
-        <h3 className="text-2xl	font-semibold">Limited edition of 1680.</h3>
+        <h3 className="text-2xl	font-semibold">
+          <Link
+            className="underline"
+            href="https://opensea.io/collection/hongbao-v2"
+          >
+            Limited edition of 1680
+          </Link>
+          .
+        </h3>
         <p>
           Gift a red packet to your friends and loved ones! On the day of the
           lunar new year, they may get a prize!
         </p>
         <p>
-          {isAuthenticated && (
-            <Button
-              className="w-1/2 mt-8 md:w-48 bg-gradient-to-r from-blue-500"
-              onClick={() => checkout()}
-            >
-              Send a red packet!
-            </Button>
-          )}
-          {!isAuthenticated && (
-            <Button
-              className="w-full mt-8 md:w-96 bg-gradient-to-r from-blue-500"
-              onClick={() => login()}
-            >
-              Connect your wallet to get started
-            </Button>
-          )}
+          <>
+            {isAuthenticated && !newYearStarted && (
+              <Button
+                className="w-1/2 mt-8 md:w-48 bg-gradient-to-r from-blue-500"
+                onClick={() => checkout()}
+              >
+                Send a red packet!
+              </Button>
+            )}
+            {isAuthenticated && newYearStarted && (
+              <p className="mt-8">
+                It looks like you had not received a Red Packet for this new
+                year... Please join the{" "}
+                <Link
+                  className="underline"
+                  href="https://discord.unlock-protocol.com"
+                >
+                  Unlock Discord
+                </Link>{" "}
+                to learn about our next experiments!
+              </p>
+            )}
+            {!isAuthenticated && (
+              <Button
+                className="w-full mt-8 md:w-96 bg-gradient-to-r from-blue-500"
+                onClick={() => login()}
+              >
+                Connect your wallet to get started
+              </Button>
+            )}
+          </>
         </p>
       </div>
       <div className="md:-ml-64 z-0">
