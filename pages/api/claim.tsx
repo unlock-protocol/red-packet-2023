@@ -9,8 +9,10 @@ export default async function  handler(req: NextApiRequest, res: NextApiResponse
   }
   const provider = new ethers.providers.JsonRpcProvider('https://rpc.unlock-protocol.com/137')
   const signer = new ethers.Wallet(process.env.PRIVATE_KEY).connect(provider)
+  const gasPrice: any = await provider.getGasPrice()
+  console.log(gasPrice)
   const hook = new ethers.Contract("0xc328ae7fc36f975be120aaa99f2d96c3e732e5b6", ABI, signer)
   const {tokenId} = JSON.parse(req.body)
-  const tx = await hook.claimPrize(tokenId)
+  const tx = await hook.claimPrize(tokenId, {gasPrice})
   res.status(200).json({ hash: tx.hash })
 }
